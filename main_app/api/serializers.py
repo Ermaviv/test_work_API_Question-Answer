@@ -8,7 +8,7 @@ class AnswerSerializer(serializers.ModelSerializer):
     text = serializers.CharField(
         required=True,
         validators=[
-            UniqueValidator(queryset=Question.objects.all())
+            UniqueValidator(queryset=Answer.objects.all())
         ],
     )
     user_id = serializers.CharField(
@@ -17,7 +17,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Answer
-        fields = ['text', 'user_id']
+        fields = ['id', 'text', 'user_id']
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -31,4 +31,16 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ('text', 'answers')
+        fields = ('id', 'text', 'answers')
+
+
+'''
+# отдельно вопросы без ответов я пока не знаю, как реализовать
+# траблы во вьюхе
+class QuestionIdSerializer(QuestionSerializer):
+    answers = AnswerSerializer(many=True, required=False)
+
+    class Meta:
+        model = Question
+        fields = ('id', 'text', 'answers')
+'''

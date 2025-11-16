@@ -1,8 +1,7 @@
 from django.urls import include, path
 from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
-
-from api.views import AnswerViewSet, QuestionViewSet
+from api.views import AnswerViewSet, QuestionViewSet  # QuestionIdViewSet
 
 router_v1 = DefaultRouter()
 router_v1.register(
@@ -20,3 +19,5 @@ urlpatterns = [
     path('api-token-auth/', views.obtain_auth_token),
     path('', include(router_v1.urls)),
 ]
+
+# path(r'questions/<int:pk>/', QuestionIdViewSet.as_view({'get': 'get'})),
